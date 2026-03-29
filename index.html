@@ -9,9 +9,12 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
     h1 {
       text-shadow: 0 0 10px #00ffcc;
+      margin-top: 20px;
     }
+
     select, button {
       background: #111;
       color: #00ffcc;
@@ -21,6 +24,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .player-grid {
       display: flex;
       flex-wrap: wrap;
@@ -28,23 +32,33 @@
       gap: 20px;
       margin-top: 30px;
     }
+
     .player-card {
       background: #111;
       width: 180px;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 0 10px #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+
+    .player-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px #ff00ff;
+    }
+
     .player-card img {
       width: 100%;
       border-radius: 50%;
       border: 2px solid #00ffcc;
     }
+
     .player-card h3 {
       font-size: 18px;
       margin: 10px 0 5px;
       color: #00ffcc;
     }
+
     .player-card p {
       font-size: 14px;
       margin: 0;
@@ -67,16 +81,16 @@
 
   <script>
     const rrPlayers = [
-      { name: "Yashasvi Jaiswal", role: "Batter" },
-      { name: "Dhruv Jurel", role: "Wicket‑keeper" },
-      { name: "Shimron Hetmyer", role: "Batter" },
-      { name: "Vaibhav Sooryavanshi", role: "Batter" },
-      { name: "Ravindra Jadeja", role: "All‑rounder" },
-      { name: "Riyan Parag", role: "All‑rounder" },
-      { name: "Jofra Archer", role: "Bowler" },
-      { name: "Sam Curran", role: "All‑rounder" },
-      { name: "Kwena Maphaka", role: "Bowler" },
-      { name: "Sandeep Sharma", role: "Bowler" }
+      { name: "Yashasvi Jaiswal", role: "Batter", photo: "https://via.placeholder.com/150?text=Yashasvi" },
+      { name: "Dhruv Jurel", role: "Wicket‑keeper", photo: "https://via.placeholder.com/150?text=Dhruv" },
+      { name: "Shimron Hetmyer", role: "Batter", photo: "https://www.rajasthanroyals.com/rr-players/shimron-hetmyer-ipl-profile-64861"text=Hetmyer" },
+      { name: "Vaibhav Sooryavanshi", role: "Batter", photo: "https://via.placeholder.com/150?text=Vaibhav" },
+      { name: "Ravindra Jadeja", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Jadeja" },
+      { name: "Riyan Parag", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Riyan" },
+      { name: "Jofra Archer", role: "Bowler", photo: "https://via.placeholder.com/150?text=Archer" },
+      { name: "Sam Curran", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Curran" },
+      { name: "Kwena Maphaka", role: "Bowler", photo: "https://via.placeholder.com/150?text=Kwena" },
+      { name: "Sandeep Sharma", role: "Bowler", photo: "https://via.placeholder.com/150?text=Sandeep" }
     ];
 
     function showTeam() {
@@ -89,7 +103,7 @@
         rrPlayers.forEach(player => {
           grid += `
             <div class="player-card">
-              <img src="https://via.placeholder.com/150" alt="${player.name}">
+              <img src="${player.photo}" alt="${player.name}">
               <h3>${player.name}</h3>
               <p>${player.role}</p>
             </div>`;

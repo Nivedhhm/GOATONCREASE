@@ -1,121 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>IPL 2026 - Rajasthan Royals</title>
+  <meta charset="UTF-8">
+  <title>IPL 2026 Teams</title>
   <style>
-    body {
-      background: #0a0a0a;
-      color: #00ffcc;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    h1 {
-      text-shadow: 0 0 10px #00ffcc;
-      margin-top: 20px;
-    }
-
-    select, button {
-      background: #111;
-      color: #00ffcc;
-      padding: 10px;
-      border: 1px solid #00ffcc;
-      margin: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .player-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .player-card {
-      background: #111;
-      width: 180px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ffcc;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .player-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px #ff00ff;
-    }
-
-    .player-card img {
-      width: 100%;
-      border-radius: 50%;
-      border: 2px solid #00ffcc;
-    }
-
-    .player-card h3 {
-      font-size: 18px;
-      margin: 10px 0 5px;
-      color: #00ffcc;
-    }
-
-    .player-card p {
-      font-size: 14px;
-      margin: 0;
-      color: #ff66cc;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .team-list button { margin: 5px; padding: 10px 15px; cursor:pointer; }
+    .player-card { border:1px solid #ddd; padding:10px; margin:10px; width:240px; display:inline-block; vertical-align:top; text-align:center; }
+    .player-card img { width:120px; height:120px; object-fit:cover; border-radius:50%; }
+    .player-info { margin-top:8px; }
   </style>
 </head>
 <body>
 
-  <h1>IPL 2026 Teams</h1>
-
-  <select id="teamSelect">
-    <option value="">-- Select Team --</option>
-    <option value="RR">Rajasthan Royals</option>
-  </select>
-
-  <button onclick="showTeam()">View Squad</button>
-
-  <div id="content"></div>
+  <h1>IPL 2026 TEAMS</h1>
+  <div class="team-list"></div>
+  <hr>
+  <div class="team-details"></div>
 
   <script>
-    const rrPlayers = [
-      { name: "Yashasvi Jaiswal", role: "Batter", photo: "https://via.placeholder.com/150?text=Yashasvi" },
-      { name: "Dhruv Jurel", role: "Wicket‑keeper", photo: "https://via.placeholder.com/150?text=Dhruv" },
-      {
-  name: "Shimron Hetmyer",
-  role: "Batter",
-  photo: "https://www.rajasthanroyals.com/rr-players/shimron-hetmyer-ipl-profile-64861",
-  text: "Hetmyer"
-      }
-      { name: "Vaibhav Sooryavanshi", role: "Batter", photo: "https://via.placeholder.com/150?text=Vaibhav" },
-      { name: "Ravindra Jadeja", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Jadeja" },
-      { name: "Riyan Parag", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Riyan" },
-      { name: "Jofra Archer", role: "Bowler", photo: "https://via.placeholder.com/150?text=Archer" },
-      { name: "Sam Curran", role: "All‑rounder", photo: "https://via.placeholder.com/150?text=Curran" },
-      { name: "Kwena Maphaka", role: "Bowler", photo: "https://via.placeholder.com/150?text=Kwena" },
-      { name: "Sandeep Sharma", role: "Bowler", photo: "https://via.placeholder.com/150?text=Sandeep" }
-    ];
+    // 📌 Team & Player Data (example for Rajasthan Royals)
+    const teams = {
+      "Rajasthan Royals": [
+        { name: "Riyan Parag", role: "Batter / Captain", price: "INR 14.00 Cr" },
+        { name: "Yashasvi Jaiswal", role: "Batter", price: "INR 18.00 Cr" },
+        { name: "Shimron Hetmyer", role: "Batter", price: "INR 11.00 Cr" },
+        { name: "Dasun Shanaka", role: "All‑Rounder", price: "INR 2.00 Cr" },
+        { name: "Ravindra Jadeja", role: "All‑Rounder", price: "INR 14.00 Cr" },
+        { name: "Ravi Bishnoi", role: "Bowler", price: "INR 7.20 Cr" }
+      ],
+      
+      "Chennai Super Kings": [
+        { name: "Ruturaj Gaikwad", role: "Batter / Captain", price: "INR 8.00 Cr" },
+        { name: "Moeen Ali", role: "All‑Rounder", price: "INR 5.75 Cr" },
+        { name: "Shivam Dube", role: "All‑Rounder", price: "INR 3.20 Cr" },
+        { name: "Deepak Chahar", role: "Bowler", price: "INR 6.00 Cr" },
+        { name: "Matheesha Pathirana", role: "Bowler", price: "INR 15.00 Cr" }
+      ],
 
-    function showTeam() {
-      const team = document.getElementById("teamSelect").value;
-      const content = document.getElementById("content");
-      content.innerHTML = "";
+      "Lucknow Super Giants": [
+        { name: "KL Rahul", role: "Batter / Captain", price: "INR 17.00 Cr" },
+        { name: "Quinton de Kock", role: "Wicketkeeper", price: "INR 12.00 Cr" },
+        { name: "Marcus Stoinis", role: "All‑Rounder", price: "INR 9.00 Cr" },
+        { name: "Kagiso Rabada", role: "Bowler", price: "INR 7.50 Cr" }
+      ]
+      // ➕ Add more IPL teams here using the same structure
+    };
 
-      if (team === "RR") {
-        let grid = '<div class="player-grid">';
-        rrPlayers.forEach(player => {
-          grid += `
-            <div class="player-card">
-              <img src="${player.photo}" alt="${player.name}">
-              <h3>${player.name}</h3>
-              <p>${player.role}</p>
-            </div>`;
-        });
-        grid += "</div>";
-        content.innerHTML = grid;
-      }
+    // 🧠 Generate ESPN Image URL by Name
+    function getESPNImage(name) {
+      const formatted = name.toLowerCase().replace(/ /g, "-");
+      return `https://www.espncricinfo.com/thumb/headshot/player/${formatted}.jpg`;
+    }
+
+    const teamListDiv = document.querySelector(".team-list");
+    const teamDetailsDiv = document.querySelector(".team-details");
+
+    // 1) List all teams
+    Object.keys(teams).forEach(teamName => {
+      const btn = document.createElement("button");
+      btn.textContent = teamName;
+      btn.onclick = () => showTeam(teamName);
+      teamListDiv.appendChild(btn);
+    });
+
+    // 2) Show selected team
+    function showTeam(name) {
+      const players = teams[name];
+      teamDetailsDiv.innerHTML = `<h2>${name}</h2>`;
+      
+      players.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "player-card";
+
+        const img = document.createElement("img");
+        img.src = getESPNImage(p.name);
+        img.onerror = () => img.src = "https://via.placeholder.com/120";
+
+        card.innerHTML = `
+          <div><strong>${p.name}</strong></div>
+          <div class="player-info">${p.role}</div>
+          <div class="player-info">${p.price}</div>
+        `;
+        card.prepend(img);
+
+        teamDetailsDiv.appendChild(card);
+      });
     }
   </script>
 

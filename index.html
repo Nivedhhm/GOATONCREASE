@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>IPL TEAMS 2026</title>
-  <style>
-    body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #121212; /* dark background */
-  color: #f0f0f0; /* light text */
-}
+<meta charset="UTF-8">
+<title>IPL TEAMS 2026</title>
+<style>
+  /* Default dark mode */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #121212; /* dark background */
+    color: #ffffff; /* white text */
+  }
 
-.team-list button {
-  margin: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  background-color: #1f1f1f; /* white button */
-  color: #f0f0f0; /* light text */
-  border: 1px solid #333; /* subtle border */
-  border-radius: 5px;
-}
+  .team-list button {
+    margin: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #1f1f1f; /* dark button */
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+  }
 
-.team-list button:hover {
-  background-color: #333; /* slightly lighter on hover */
-}
+  .team-list button:hover {
+    background-color: #333;
+  }
 
-.player-card {
-  border: 1px solid #333; /* darker border */
-  padding: 10px;
-  margin: 10px;
-  width: 240px;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  background-color: #1e1e1e; /* yellow card background */
-  border-radius: 8px;
-}
+  .team-details {
+    margin-top: 20px;
+  }
 
-.player-card img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #444;
-}
+  .player-card {
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 10px;
+    width: 240px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    background-color: #1e1e1e; /* default dark card */
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
 
-.player-info {
-  margin-top: 8px;
-}
+  .player-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #444;
+  }
 
-h1, h2, h3 {
-  color: #f0f0f0;
-}
+  .player-info { margin-top: 8px; }
+
+  /* Highlight CSK background when clicked */
+  .csk-active {
+    background-color: #ffeb3b !important; /* bright yellow */
+    color: #000 !important; /* black text for readability */
+  }
+</style>
+</head>
+<body>
 
 <h1>IPL TEAMS 2026</h1>
 <div class="team-list"></div>
@@ -59,7 +68,7 @@ h1, h2, h3 {
 <div class="team-details"></div>
 
 <script>
-  // IPL 2026 Teams and Players (only CSK included for now)
+  // IPL 2026 CSK Players
   const teams = {
     "Chennai Super Kings": {
       "Batters & Wicketkeepers": [
@@ -99,7 +108,7 @@ h1, h2, h3 {
   const teamListDiv = document.querySelector(".team-list");
   const teamDetailsDiv = document.querySelector(".team-details");
 
-  // 1) Create buttons for all teams
+  // Create buttons for teams
   Object.keys(teams).forEach(teamName => {
     const btn = document.createElement("button");
     btn.textContent = teamName;
@@ -107,7 +116,7 @@ h1, h2, h3 {
     teamListDiv.appendChild(btn);
   });
 
-  // 2) Display players by category
+  // Display players
   function showTeam(name) {
     const categories = teams[name];
     teamDetailsDiv.innerHTML = `<h2>${name}</h2>`;
@@ -121,8 +130,13 @@ h1, h2, h3 {
         const card = document.createElement("div");
         card.className = "player-card";
 
+        // Highlight card yellow for CSK
+        if (name === "Chennai Super Kings") {
+          card.classList.add("csk-active");
+        }
+
         const img = document.createElement("img");
-        img.src = player.photo || "https://via.placeholder.com/120"; // placeholder if no photo
+        img.src = player.photo || "https://via.placeholder.com/120";
         img.alt = player.name;
 
         card.innerHTML = `
@@ -131,7 +145,6 @@ h1, h2, h3 {
           <div class="player-info">${player.price}</div>
         `;
         card.prepend(img);
-
         teamDetailsDiv.appendChild(card);
       });
     });

@@ -1,83 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sports Analytics</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <title>IPL 2026 - Rajasthan Royals</title>
   <style>
     body {
-      background-color: #0a0a0a;
+      background: #0a0a0a;
       color: #00ffcc;
       font-family: Arial, sans-serif;
       text-align: center;
     }
-
     h1 {
-      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
     }
-
-    canvas {
-      margin-top: 30px;
+    select, button {
       background: #111;
+      color: #00ffcc;
+      padding: 10px;
       border: 1px solid #00ffcc;
-      box-shadow: 0 0 20px #00ffcc;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-
-    .card {
+    .player-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .player-card {
       background: #111;
-      padding: 20px;
-      margin: 20px auto;
-      width: 300px;
+      width: 180px;
+      padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 0 15px #00ffcc;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+    .player-card img {
+      width: 100%;
+      border-radius: 50%;
+      border: 2px solid #00ffcc;
+    }
+    .player-card h3 {
+      font-size: 18px;
+      margin: 10px 0 5px;
+      color: #00ffcc;
+    }
+    .player-card p {
+      font-size: 14px;
+      margin: 0;
+      color: #ff66cc;
     }
   </style>
 </head>
-
 <body>
 
-  <h1>⚡ Sports Analytics Dashboard</h1>
+  <h1>IPL 2026 Teams</h1>
 
-  <div class="card">
-    <h2>Team Performance</h2>
-    <canvas id="myChart"></canvas>
-  </div>
+  <select id="teamSelect">
+    <option value="">-- Select Team --</option>
+    <option value="RR">Rajasthan Royals</option>
+  </select>
+
+  <button onclick="showTeam()">View Squad</button>
+
+  <div id="content"></div>
 
   <script>
-    const ctx = document.getElementById('myChart');
+    const rrPlayers = [
+      { name: "Yashasvi Jaiswal", role: "Batter" },
+      { name: "Dhruv Jurel", role: "Wicket‑keeper" },
+      { name: "Shimron Hetmyer", role: "Batter" },
+      { name: "Vaibhav Sooryavanshi", role: "Batter" },
+      { name: "Ravindra Jadeja", role: "All‑rounder" },
+      { name: "Riyan Parag", role: "All‑rounder" },
+      { name: "Jofra Archer", role: "Bowler" },
+      { name: "Sam Curran", role: "All‑rounder" },
+      { name: "Kwena Maphaka", role: "Bowler" },
+      { name: "Sandeep Sharma", role: "Bowler" }
+    ];
 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Match 1', 'Match 2', 'Match 3', 'Match 4'],
-        datasets: [{
-          label: 'Goals Scored',
-          data: [2, 3, 1, 4],
-          borderColor: '#00ffcc',
-          backgroundColor: 'rgba(0,255,204,0.2)',
-          borderWidth: 2,
-          tension: 0.4,
-          pointBackgroundColor: '#00ffcc'
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            labels: {
-              color: '#00ffcc'
-            }
-          }
-        },
-        scales: {
-          x: {
-            ticks: { color: '#00ffcc' }
-          },
-          y: {
-            ticks: { color: '#00ffcc' }
-          }
-        }
+    function showTeam() {
+      const team = document.getElementById("teamSelect").value;
+      const content = document.getElementById("content");
+      content.innerHTML = "";
+
+      if (team === "RR") {
+        let grid = '<div class="player-grid">';
+        rrPlayers.forEach(player => {
+          grid += `
+            <div class="player-card">
+              <img src="https://via.placeholder.com/150" alt="${player.name}">
+              <h3>${player.name}</h3>
+              <p>${player.role}</p>
+            </div>`;
+        });
+        grid += "</div>";
+        content.innerHTML = grid;
       }
-    });
+    }
   </script>
 
 </body>

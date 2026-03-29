@@ -3,28 +3,79 @@
 <head>
   <title>Sports Analytics</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    }
+
+    canvas {
+      margin-top: 30px;
+      background: #111;
+      border: 1px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    .card {
+      background: #111;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>📊 Sports Team Analytics</h1>
+  <h1>⚡ Sports Analytics Dashboard</h1>
 
-  <h2>Team Performance</h2>
-  <p>Wins, Losses, and Draws</p>
-
-  <canvas id="myChart" width="400" height="200"></canvas>
+  <div class="card">
+    <h2>Team Performance</h2>
+    <canvas id="myChart"></canvas>
+  </div>
 
   <script>
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Wins', 'Losses', 'Draws'],
+        labels: ['Match 1', 'Match 2', 'Match 3', 'Match 4'],
         datasets: [{
-          label: 'Match Results',
-          data: [20, 5, 5],
-          borderWidth: 1
+          label: 'Goals Scored',
+          data: [2, 3, 1, 4],
+          borderColor: '#00ffcc',
+          backgroundColor: 'rgba(0,255,204,0.2)',
+          borderWidth: 2,
+          tension: 0.4,
+          pointBackgroundColor: '#00ffcc'
         }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: '#00ffcc'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#00ffcc' }
+          },
+          y: {
+            ticks: { color: '#00ffcc' }
+          }
+        }
       }
     });
   </script>

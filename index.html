@@ -4,15 +4,54 @@
   <meta charset="UTF-8">
   <title>IPL TEAMS 2026</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .team-list button { margin: 5px; padding: 10px 15px; cursor: pointer; }
-    .player-card { border:1px solid #ddd; padding:10px; margin:10px; width:240px; display:inline-block; vertical-align:top; text-align:center; }
-    .player-card img { width:120px; height:120px; object-fit:cover; border-radius:50%; }
-    .player-info { margin-top:8px; }
-    h2 { margin-top:30px; }
-  </style>
-</head>
-<body>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #121212; /* dark background */
+  color: #f0f0f0; /* light text */
+}
+
+.team-list button {
+  margin: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #1f1f1f; /* dark button */
+  color: #f0f0f0; /* light text */
+  border: 1px solid #333; /* subtle border */
+  border-radius: 5px;
+}
+
+.team-list button:hover {
+  background-color: #333; /* slightly lighter on hover */
+}
+
+.player-card {
+  border: 1px solid #333; /* darker border */
+  padding: 10px;
+  margin: 10px;
+  width: 240px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  background-color: #1e1e1e; /* dark card background */
+  border-radius: 8px;
+}
+
+.player-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #444;
+}
+
+.player-info {
+  margin-top: 8px;
+}
+
+h1, h2, h3 {
+  color: #f0f0f0;
+}
 
 <h1>IPL TEAMS 2026</h1>
 <div class="team-list"></div>

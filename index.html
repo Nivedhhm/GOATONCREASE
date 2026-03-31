@@ -58,52 +58,66 @@
 <script>
   const matches = [
     {
-      date: "31-Mar-2026",
+      dateTime: "2026-03-31T19:30:00",
       teams: "PBKS vs GT",
-      venue: "New Chandigarh",
-      time: "7:30 PM"
+      venue: "New Chandigarh"
     },
     {
-      date: "01-Apr-2026",
+      dateTime: "2026-04-01T19:30:00",
       teams: "LSG vs DC",
-      venue: "Lucknow",
-      time: "7:30 PM"
+      venue: "Lucknow"
     },
     {
-      date: "02-Apr-2026",
+      dateTime: "2026-04-02T19:30:00",
       teams: "KKR vs SRH",
-      venue: "Kolkata",
-      time: "7:30 PM"
+      venue: "Kolkata"
     },
     {
-      date: "03-Apr-2026",
+      dateTime: "2026-04-03T19:30:00",
       teams: "CSK vs PBKS",
-      venue: "Chennai",
-      time: "7:30 PM"
-    },
-    {
-      date: "04-Apr-2026",
-      teams: "DC vs MI",
-      venue: "Delhi",
-      time: "3:30 PM"
+      venue: "Chennai"
     }
   ];
 
   const container = document.getElementById("matches");
 
-  matches.forEach((match, index) => {
-    container.innerHTML += `
-      <div class="match">
-        <div class="teams">${match.teams}</div>
-        <div class="details">${match.date} | ${match.time}</div>
-        <div class="details">${match.venue}</div>
+  function createMatchCards() {
+    container.innerHTML = "";
 
-        <a href="details.html?match=${index}" class="more-btn">
-          More Details
-        </a>
-      </div>
-    `;
-  });
+    matches.forEach((match, index) => {
+      const matchTime = new Date(match.dateTime).getTime();
+      const now = new Date().getTime();
+      const diff = matchTime - now;
+
+      let timerText = "";
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+        timerText = `${days}d ${hours}h ${minutes}m left`;
+      } else {
+        timerText = "Match Started / Finished";
+      }
+
+      container.innerHTML += `
+        <div class="match">
+          <div class="teams">${match.teams}</div>
+          <div class="details">${new Date(match.dateTime).toLocaleString()}</div>
+          <div class="details">${match.venue}</div>
+          <div class="details" style="color: yellow;">⏳ ${timerText}</div>
+
+          <a href="details.html?match=${index}" class="more-btn">
+            More Details
+          </a>
+        </div>
+      `;
+    });
+  }
+
+  createMatchCards();
+  setInterval(createMatchCards, 1000);
 </script>
 
 </body>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Match Details</title>
+
+  <style>
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Match Details</h1>
+<p id="info"></p>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const matchIndex = params.get("match");
+
+  const matches = [
+    "PBKS vs GT - New Chandigarh - 7:30 PM",
+    "LSG vs DC - Lucknow - 7:30 PM",
+    "KKR vs SRH - Kolkata - 7:30 PM",
+    "CSK vs PBKS - Chennai - 7:30 PM",
+    "DC vs MI - Delhi - 3:30 PM"
+  ];
+
+  document.getElementById("info").innerText = matches[matchIndex];
+</script>
+
+</body>
+</html>

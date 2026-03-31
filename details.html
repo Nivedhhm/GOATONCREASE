@@ -11,7 +11,15 @@
       text-align: center;
       padding: 20px;
     }
-
+     .watch-btn {
+  display: inline-block;
+  background: red;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 10px;
+    }
     .container {
       max-width: 500px;
       margin: auto;
@@ -95,9 +103,9 @@
   // LIVE VIDEO only for first match (PBKS vs GT)
   if (match.live) {
     html += `
-      <div class="live-title">🔴 LIVE VIDEO</div>
-      <iframe src="${match.live}" allowfullscreen></iframe>
-    `;
+  <div class="live-title">🔴 LIVE VIDEO</div>
+  <iframe src="${match.live}"></iframe>
+`;
   }
 
   document.getElementById("content").innerHTML = html;

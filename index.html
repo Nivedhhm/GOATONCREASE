@@ -1,47 +1,110 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>IPL Teams 2026</title>
+  <title>IPL 2026 Fixtures</title>
 
   <style>
     body {
-      background-color: #0d0d0d;
+      background: #0d0d0d;
       color: white;
+      font-family: Arial;
+      padding: 10px;
+    }
+
+    h1 {
       text-align: center;
     }
 
-    .card {
-  width: 120px;
-  margin: 40px auto;
-  padding: 15px;
-  border-radius: 12px;
+    .match {
+      background-color: #0b3d91; /* dark blue */
+      color: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 12px;
+      position: relative;
+    }
 
-  background: #f5e6a3 url("https://image2url.com/r2/default/images/1774798060147-f3c4831a-a019-4f72-8152-2fe0f19fbcaa.png") no-repeat center;
-  background-size: 120px;
-  background-blend-mode: multiply },
+    .teams {
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-    img {
-      width: 100%;
-      border-radius: 10px;
+    .details {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .more-btn {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background: #ffffff;
+      color: #0b3d91;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
     }
   </style>
-
 </head>
 
 <body>
 
-<h1>IPL TEAMS 2026</h1>
+<h1>IPL 2026 Matches</h1>
 
-<div class="card">
-  <img src="https://image2url.com/r2/default/images/1774797094838-9bb0de4c-7b8c-4a42-87b2-493086273da5.png">
+<div id="matches"></div>
 
-  <h3>Ruturaj Gaikwad (C)</h3>
-  <p>Batsman</p>
-  <p>Captain</p>
-  <p>INR 18 Cr</p>
-</div>
+<script>
+  const matches = [
+    {
+      date: "31-Mar-2026",
+      teams: "PBKS vs GT",
+      venue: "New Chandigarh",
+      time: "7:30 PM"
+    },
+    {
+      date: "01-Apr-2026",
+      teams: "LSG vs DC",
+      venue: "Lucknow",
+      time: "7:30 PM"
+    },
+    {
+      date: "02-Apr-2026",
+      teams: "KKR vs SRH",
+      venue: "Kolkata",
+      time: "7:30 PM"
+    },
+    {
+      date: "03-Apr-2026",
+      teams: "CSK vs PBKS",
+      venue: "Chennai",
+      time: "7:30 PM"
+    },
+    {
+      date: "04-Apr-2026",
+      teams: "DC vs MI",
+      venue: "Delhi",
+      time: "3:30 PM"
+    }
+  ];
+
+  const container = document.getElementById("matches");
+
+  matches.forEach((match, index) => {
+    container.innerHTML += `
+      <div class="match">
+        <div class="teams">${match.teams}</div>
+        <div class="details">${match.date} | ${match.time}</div>
+        <div class="details">${match.venue}</div>
+
+        <a href="details.html?match=${index}" class="more-btn">
+          More Details
+        </a>
+      </div>
+    `;
+  });
+</script>
 
 </body>
 </html>

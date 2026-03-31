@@ -9,6 +9,10 @@
       color: white;
       font-family: Arial;
       padding: 10px;
+    .timer {
+  font-weight: bold;
+  color: white;
+  margin-top: 5px;
     }
 
     h1 {
@@ -16,12 +20,15 @@
     }
 
     .match {
-      background-color: #0b3d91; /* dark blue */
-      color: white;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 12px;
-      position: relative;
+  background-color: #0b3d91;
+  color: white;
+  padding: 15px;
+  margin: 15px auto;   /* center it */
+  border-radius: 12px;
+  position: relative;
+
+  width: 90%;          /* 🔥 reduce width */
+  max-width: 400px;    /* 🔥 keep it neat on big screens */
     }
 
     .teams {
@@ -106,7 +113,7 @@
           <div class="teams">${match.teams}</div>
           <div class="details">${new Date(match.dateTime).toLocaleString()}</div>
           <div class="details">${match.venue}</div>
-          <div class="details" style="color: yellow;">⏳ ${timerText}</div>
+          <div class="timer">⏳ ${timerText}</div>
 
           <a href="details.html?match=${index}" class="more-btn">
             More Details

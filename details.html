@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Match Details</title>
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
 body {
   margin: 0;
@@ -228,25 +228,49 @@ const match = {
   }
 };
 
+<script>
+
+const match = { ... }   // your match data
+
 function showTab(tab) {
   let html = "";
 
   if (tab === "highlights") {
+    html += `
+      <video id="player" controls></video>
 
-  html += `
-    <div class="video-box">
-      <div class="video-title">Match Highlights</div>
+      <button onclick="changeLang('hindi')">Hindi</button>
+      <button onclick="changeLang('english')">English</button>
+    `;
+  }
 
-      <video id="player" controls autoplay>
-        <source src="https://vod01.akt.hotstar-cdn.net/videos/cricket/inallow-ipl-2026-1540066046/1540066047/6ea0566b60b64ef9821f196777982758/index_7.m3u8" type="application/x-mpegURL">
-      </video>
+  document.getElementById("content").innerHTML = html;
+}
 
-      <div class="lang-buttons">
-        <button onclick="changeLang('hindi')">Hindi</button>
-        <button onclick="changeLang('english')">English</button>
-      </div>
-    </div>
-  `;
+
+// ✅ 👉 ADD PLAYER LOGIC HERE (same script)
+
+function loadVideo(url) {
+  const video = document.getElementById("player");
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+  } else {
+    video.src = url;
+  }
+}
+
+function changeLang(lang) {
+  if (lang === "hindi") {
+    loadVideo("YOUR-HINDI-LINK");
+  } else {
+    loadVideo("YOUR-ENGLISH-LINK");
+  }
+}
+
+</script>
 
   match.highlights.forEach(h => {
     html += `<div class="highlight">${h}</div>`;

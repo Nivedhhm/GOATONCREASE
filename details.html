@@ -153,14 +153,14 @@ const match = {
   ],
 
   players: {
-    batters: [
-      {name:"Connolly", r:72, b:44},
-      {name:"Gill", r:39, b:27}
-    ],
-    bowlers: [
-      {name:"Prasidh", w:3, r:29},
-      {name:"Vyshak", w:3, r:34}
-    ]
+  batters: [
+    {name:"Connolly", r:72, b:44, sr:163.64},
+    {name:"Gill", r:39, b:27, sr:144.44}
+  ],
+  bowlers: [
+    {name:"Prasidh", w:3, r:29, econ:7.25},
+    {name:"Vyshak", w:3, r:34, econ:8.50}
+  ]
   }
 };
 
@@ -183,12 +183,18 @@ function showTab(tab) {
   }
 
   if (tab === "players") {
-    html += `<div class="section-title">Top Batters</div>`;
 
-    match.players.batters.forEach(p => {
-      html += `<div class="row">
-        <span>${p.name}</span><span>${p.r}</span><span>${p.b}</span>
-      </div>`;
+  html += `<div class="section-title">Top Batters</div>`;
+
+  // ✅ HEADER
+  html += `<div class="row header">
+    <span>Name</span>
+    <span>R</span>
+    <span>B</span>
+    <span>SR</span>
+  </div>`;
+
+  match.players.batters.forEach(p
     });
 
     html += `<div class="section-title">Top Bowlers</div>`;

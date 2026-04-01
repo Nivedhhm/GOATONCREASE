@@ -112,6 +112,33 @@ hr {
   border-left: 3px solid #0b3d91;
   border-radius: 6px;
 }
+.section-title {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+  font-size: 13px;
+}
+
+.row span {
+  flex: 1;
+  text-align: center;
+}
+
+.row span:first-child {
+  text-align: left;
+}
+
+.header {
+  font-weight: bold;
+  color: #888;
+}
 </style>
 </head>
 
@@ -119,6 +146,10 @@ hr {
 
 <div id="app"></div>
 
+
+
+</body>
+</html>
 <script>
 const match = {
   league: "Indian Premier League",
@@ -141,40 +172,67 @@ const match = {
   result: "PBKS won by 3 wickets",
 
   highlights: [
-    "PBKS chased successfully in 19.1 overs",
-    "Gill scored 39 for GT",
-    "Cooper Connolly 72 match winning innings"
+    "PBKS chased 162 successfully",
+    "Cooper Connolly played match-winning knock (72)",
+    "Gill gave strong start",
+    "Game turned in 18th over",
+    "Excellent finishing by PBKS lower order"
   ],
 
-  commentary: [
-    "0.1: Arshdeep to Gill, dot ball",
-    "0.2: FOUR! Beautiful cover drive",
-    "0.4: WICKET! Edge to keeper",
-    "0.6: SIX! Massive hit",
-    "1.2: FOUR! Cut shot",
-    "1.5: WICKET! Bowled him"
-  ]
+  bestPlayers: {
+    batters: [
+      { name: "Cooper Connolly (PBKS)", r: 72, b: 44, fours: 5, sixes: 5, sr: 163.64 },
+      { name: "Shubman Gill (GT)", r: 39, b: 27, fours: 6, sixes: 0, sr: 144.44 }
+    ],
+    bowlers: [
+      { name: "Prasidh Krishna (GT)", o: 4, m: 0, r: 29, w: 3, econ: 7.25 },
+      { name: "Vijaykumar Vyshak (PBKS)", o: 4, m: 0, r: 34, w: 3, econ: 8.5 }
+    ]
+  }
 };
 
 function showTab(tab) {
   let html = "";
 
-  if (tab === "recap") {
+  if (tab === "highlights") {
     match.highlights.forEach(h => {
       html += `<div class="highlight">${h}</div>`;
     });
   }
 
-  if (tab === "score") {
-    html += `
-      <div class="row"><b>Top Batter</b><span>72 (44)</span></div>
-      <div class="row"><b>Top Bowler</b><span>3/29</span></div>
-    `;
-  }
+  if (tab === "players") {
+    html += `<div class="section-title">Top Batters</div>`;
 
-  if (tab === "commentary") {
-    match.commentary.forEach(c => {
-      html += `<div class="ball">${c}</div>`;
+    html += `<div class="row header">
+      <span>Name</span><span>R</span><span>B</span><span>4s</span><span>6s</span><span>SR</span>
+    </div>`;
+
+    match.bestPlayers.batters.forEach(p => {
+      html += `<div class="row">
+        <span>${p.name}</span>
+        <span>${p.r}</span>
+        <span>${p.b}</span>
+        <span>${p.fours}</span>
+        <span>${p.sixes}</span>
+        <span>${p.sr}</span>
+      </div>`;
+    });
+
+    html += `<div class="section-title">Top Bowlers</div>`;
+
+    html += `<div class="row header">
+      <span>Name</span><span>O</span><span>M</span><span>R</span><span>W</span><span>Econ</span>
+    </div>`;
+
+    match.bestPlayers.bowlers.forEach(p => {
+      html += `<div class="row">
+        <span>${p.name}</span>
+        <span>${p.o}</span>
+        <span>${p.m}</span>
+        <span>${p.r}</span>
+        <span>${p.w}</span>
+        <span>${p.econ}</span>
+      </div>`;
     });
   }
 
@@ -193,7 +251,6 @@ document.getElementById("app").innerHTML = `
     <hr>
 
     <div class="score-box">
-
       <div class="team">
         <img src="${match.team1.logo}">
         <div>${match.team1.short}</div>
@@ -207,15 +264,13 @@ document.getElementById("app").innerHTML = `
         <img src="${match.team2.logo}">
         <div>${match.team2.short}</div>
       </div>
-
     </div>
 
     <div class="result">${match.result}</div>
 
     <div class="tabs">
-      <div id="recap" class="tab active" onclick="showTab('recap')">Recap</div>
-      <div id="score" class="tab" onclick="showTab('score')">Scorecard</div>
-      <div id="commentary" class="tab" onclick="showTab('commentary')">Commentary</div>
+      <div id="highlights" class="tab active" onclick="showTab('highlights')">Highlights</div>
+      <div id="players" class="tab" onclick="showTab('players')">BEST PLAYERS</div>
     </div>
 
     <div id="content" class="content"></div>
@@ -223,8 +278,5 @@ document.getElementById("app").innerHTML = `
   </div>
 `;
 
-showTab("recap");
+showTab("highlights");
 </script>
-
-</body>
-</html>

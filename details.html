@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Match Details</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* MAIN CARD */
+.card {
+  max-width: 500px;
+  margin: 20px auto;
+  background: #1c1c1c;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+/* HEADER */
+.title {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.venue {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+hr {
+  border: 0.5px solid #333;
+}
+
+/* SCORE AREA */
+.score-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.team {
+  text-align: center;
+  width: 30%;
+}
+
+.team img {
+  width: 40px;
+}
+
+.score {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.result {
+  text-align: center;
+  margin: 10px 0;
+  color: #aaa;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  background: #000;
+  border-radius: 25px;
+  padding: 5px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.active {
+  background: #333;
+}
+
+/* CONTENT */
+.content {
+  margin-top: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+  font-size: 14px;
+}
+
+.highlight {
+  padding: 8px;
+  margin: 5px 0;
+  background: #111;
+  border-radius: 6px;
+}
+
+.ball {
+  padding: 8px;
+  margin: 5px 0;
+  background: #111;
+  border-left: 3px solid #0b3d91;
+  border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+const match = {
+  league: "Indian Premier League",
+  venue: "Punjab Cricket Association Stadium, Mohali",
+
+  team1: {
+    name: "Gujarat Titans",
+    short: "GT",
+    logo: "https://image2url.com/r2/default/images/1774798060147-f3c4831a-a019-4f72-8152-2fe0f19fbcaa.png",
+    score: "162/6 (20)"
+  },
+
+  team2: {
+    name: "Punjab Kings",
+    short: "PBKS",
+    logo: "https://image2url.com/r2/default/images/1774797094838-9bb0de4c-7b8c-4a42-87b2-493086273da5.png",
+    score: "165/7 (19.1)"
+  },
+
+  result: "PBKS won by 3 wickets",
+
+  highlights: [
+    "PBKS chased successfully in 19.1 overs",
+    "Gill scored 39 for GT",
+    "Cooper Connolly 72 match winning innings"
+  ],
+
+  commentary: [
+    "0.1: Arshdeep to Gill, dot ball",
+    "0.2: FOUR! Beautiful cover drive",
+    "0.4: WICKET! Edge to keeper",
+    "0.6: SIX! Massive hit",
+    "1.2: FOUR! Cut shot",
+    "1.5: WICKET! Bowled him"
+  ]
+};
+
+function showTab(tab) {
+  let html = "";
+
+  if (tab === "recap") {
+    match.highlights.forEach(h => {
+      html += `<div class="highlight">${h}</div>`;
+    });
+  }
+
+  if (tab === "score") {
+    html += `
+      <div class="row"><b>Top Batter</b><span>72 (44)</span></div>
+      <div class="row"><b>Top Bowler</b><span>3/29</span></div>
+    `;
+  }
+
+  if (tab === "commentary") {
+    match.commentary.forEach(c => {
+      html += `<div class="ball">${c}</div>`;
+    });
+  }
+
+  document.getElementById("content").innerHTML = html;
+
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById(tab).classList.add("active");
+}
+
+document.getElementById("app").innerHTML = `
+  <div class="card">
+
+    <div class="title">${match.league}</div>
+    <div class="venue">${match.venue}</div>
+
+    <hr>
+
+    <div class="score-box">
+
+      <div class="team">
+        <img src="${match.team1.logo}">
+        <div>${match.team1.short}</div>
+      </div>
+
+      <div class="score">${match.team1.score}</div>
+
+      <div class="score">${match.team2.score}</div>
+
+      <div class="team">
+        <img src="${match.team2.logo}">
+        <div>${match.team2.short}</div>
+      </div>
+
+    </div>
+
+    <div class="result">${match.result}</div>
+
+    <div class="tabs">
+      <div id="recap" class="tab active" onclick="showTab('recap')">Recap</div>
+      <div id="score" class="tab" onclick="showTab('score')">Scorecard</div>
+      <div id="commentary" class="tab" onclick="showTab('commentary')">Commentary</div>
+    </div>
+
+    <div id="content" class="content"></div>
+
+  </div>
+`;
+
+showTab("recap");
+</script>
+
+</body>
+</html>

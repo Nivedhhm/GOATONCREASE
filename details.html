@@ -8,108 +8,132 @@
       background: #0d0d0d;
       color: white;
       font-family: Arial;
-      text-align: center;
-      padding: 20px;
-    }
-     .watch-btn {
-  display: inline-block;
-  background: red;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-top: 10px;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
+      margin: 0;
     }
 
-    .title {
-      font-size: 22px;
+    .header {
+      background: #0b3d91;
+      padding: 15px;
+      text-align: center;
       font-weight: bold;
-      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      background: #111;
+      padding: 10px;
+    }
+
+    .tab {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+      text-align: center;
     }
 
     .stats {
-      font-weight: bold;
       margin: 10px 0;
-    }
-
-    .live-title {
-      margin-top: 25px;
-      font-size: 18px;
       font-weight: bold;
-      color: red;
     }
 
-    iframe {
-      width: 100%;
-      height: 250px;
-      margin-top: 10px;
-      border-radius: 10px;
+    .live-btn {
+      display: inline-block;
+      background: red;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 15px;
     }
   </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <div id="content"></div>
-
-</div>
+<div id="app"></div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const matchIndex = params.get("match");
+const params = new URLSearchParams(window.location.search);
+const matchIndex = params.get("match");
 
-  const data = [
-    {
-      teams: "PBKS vs GT",
-      stats: [
-        "PBKS: 0 Trophies | 1 Final",
-        "GT: 1 Trophy | 2 Finals",
-        "Last Playoff: PBKS - 2014 | GT - 2023"
-      ],
-      live: "https://ev-fast-mpd.starzplayarabia.com/live/eds/CricLife1/DASH/CricLife1.mpd?%7CdrmScheme=clearkey&drmLicense=1e23e51b09a67b83813c17049870bcd4:c3d6288e378b0dc55320fd0e6fd2e55f" // 👉 replace with your real live link
-    },
-    {
-      teams: "LSG vs DC",
-      stats: [
-        "LSG: 0 Trophies",
-        "DC: 0 Trophies | 1 Final",
-        "Last Playoff: DC - 2021"
-      ]
-    },
-    {
-      teams: "KKR vs SRH",
-      stats: [
-        "KKR: 2 Trophies",
-        "SRH: 1 Trophy",
-        "Both regular playoff teams"
-      ]
-    }
-  ];
-
-  const match = data[matchIndex];
-
-  let html = `<div class="title">${match.teams}</div>`;
-
-  match.stats.forEach(stat => {
-    html += `<div class="stats">${stat}</div>`;
-  });
-
-  // LIVE VIDEO only for first match (PBKS vs GT)
-  if (match.live) {
-    html += `
-  <div class="live-title">🔴 LIVE VIDEO</div>
-  <iframe src="${match.live}"></iframe>
-`;
+const matches = [
+  {
+    teams: "PBKS vs GT",
+    venue: "New Chandigarh",
+    stats: [
+      "PBKS: 0 Trophies | 1 Final",
+      "GT: 1 Trophy | 2 Finals",
+      "Last Playoff: PBKS - 2014 | GT - 2023"
+    ],
+    live: "https://j-plus.free.nf/jtv/player_india.html?id=4470"
+  },
+  {
+    teams: "LSG vs DC",
+    venue: "Lucknow",
+    stats: [
+      "LSG: 0 Trophies",
+      "DC: 0 Trophies | 1 Final",
+      "Last Playoff: DC - 2021"
+    ]
+  },
+  {
+    teams: "KKR vs SRH",
+    venue: "Kolkata",
+    stats: [
+      "KKR: 2 Trophies",
+      "SRH: 1 Trophy"
+    ]
+  },
+  {
+    teams: "CSK vs PBKS",
+    venue: "Chennai",
+    stats: [
+      "CSK: 5 Trophies",
+      "PBKS: 0 Trophies"
+    ]
   }
+];
 
-  document.getElementById("content").innerHTML = html;
+const match = matches[matchIndex];
+
+let html = `
+  <div class="header">${match.teams}</div>
+
+  <div class="tabs">
+    <div class="tab">Live</div>
+    <div class="tab">Scorecard</div>
+    <div class="tab">Info</div>
+  </div>
+
+  <div class="content">
+`;
+
+match.stats.forEach(stat => {
+  html += `<div class="stats">${stat}</div>`;
+});
+
+// LIVE button only if link exists
+if (match.live) {
+  html += `
+    <div style="margin-top:20px;">
+      🔴 LIVE NOW
+      <br>
+      <a href="${match.live}" target="_blank" class="live-btn">
+        Watch Live
+      </a>
+    </div>
+  `;
+}
+
+html += `</div>`;
+
+document.getElementById("app").innerHTML = html;
 </script>
 
 </body>
-</html>
+</html>}

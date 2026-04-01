@@ -134,13 +134,13 @@ const match = {
 
   team1: {
     short: "GT",
-    logo: "https://image2url.com/r2/default/images/1774798060147-f3c4831a-a019-4f72-8152-2fe0f19fbcaa.png",
+    logo: "https://image2url.com/r2/default/images/1775022095870-b76932a7-5c17-4393-b509-d9e11bd46e80.png.png",
     score: "162/6"
   },
 
   team2: {
     short: "PBKS",
-    logo: "https://image2url.com/r2/default/images/1774797094838-9bb0de4c-7b8c-4a42-87b2-493086273da5.png",
+    logo: "https://image2url.com/r2/default/images/1775022115172-2fd3500c-ae9c-4530-bbdc-94d020863c36.png.png",
     score: "165/7"
   },
 
@@ -226,10 +226,10 @@ function changeLang(lang) {
   document.querySelectorAll(".btns button").forEach(b => b.classList.remove("active"));
 
   if (lang === "hindi") {
-    loadVideo("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8");
+    loadVideo("https://vod01.akt.hotstar-cdn.net/videos/cricket/inallow-ipl-2026-1540066046/1540066047/6ea0566b60b64ef9821f196777982758/index_7.m3u8");
     document.querySelectorAll(".btns button")[0].classList.add("active");
   } else {
-    loadVideo("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8");
+    loadVideo("https://vod01.akt.hotstar-cdn.net/videos/cricket/inallow-ipl-2026-1540066046/1540066047/204a63c177cb4ab8bbedc5d05cdd6a26/index_7.m3u8");
     document.querySelectorAll(".btns button")[1].classList.add("active");
   }
 }

@@ -65,74 +65,78 @@ const matches = [
   {
     teams: "PBKS vs GT",
     venue: "New Chandigarh",
-    stats: [
-      "PBKS: 0 Trophies | 1 Final",
-      "GT: 1 Trophy | 2 Finals",
-      "Last Playoff: PBKS - 2014 | GT - 2023"
+
+    highlights: [
+      "PBKS scored 156/6 in 20 overs",
+      "GT strong start in chase",
+      "Shubman Gill leading from front",
+      "Match turning point: 15th over"
     ],
-    live: "https://j-plus.free.nf/jtv/player_india.html?id=4470"
+
+    commentary: [
+      "0.1: Arshdeep to Gill, dot ball",
+      "0.2: FOUR! Beautiful cover drive",
+      "0.3: Single taken",
+      "0.4: WICKET! Edge to keeper",
+      "0.5: Dot ball",
+      "0.6: SIX! Massive hit over midwicket",
+
+      "1.1: Rabada to Sudharsan, single",
+      "1.2: FOUR! Cut shot",
+      "1.3: Dot ball",
+      "1.4: Two runs",
+      "1.5: WICKET! Bowled him",
+      "1.6: Dot ball"
+    ]
   },
+
   {
     teams: "LSG vs DC",
     venue: "Lucknow",
-    stats: [
-      "LSG: 0 Trophies",
-      "DC: 0 Trophies | 1 Final",
-      "Last Playoff: DC - 2021"
-    ]
-  },
-  {
-    teams: "KKR vs SRH",
-    venue: "Kolkata",
-    stats: [
-      "KKR: 2 Trophies",
-      "SRH: 1 Trophy"
-    ]
-  },
-  {
-    teams: "CSK vs PBKS",
-    venue: "Chennai",
-    stats: [
-      "CSK: 5 Trophies",
-      "PBKS: 0 Trophies"
+
+    highlights: [
+      "Match yet to start",
+      "Pitch looks batting friendly"
+    ],
+
+    commentary: [
+      "Match not started"
     ]
   }
 ];
 
 const match = matches[matchIndex];
 
-let html = `
+function showTab(tab) {
+  let content = "";
+
+  if (tab === "highlights") {
+    match.highlights.forEach(h => {
+      content += `<div class="highlight">${h}</div>`;
+    });
+  }
+
+  if (tab === "commentary") {
+    match.commentary.forEach(c => {
+      content += `<div class="ball">${c}</div>`;
+    });
+  }
+
+  document.getElementById("content").innerHTML = content;
+}
+
+document.getElementById("app").innerHTML = `
   <div class="header">${match.teams}</div>
 
   <div class="tabs">
-    <div class="tab">Live</div>
-    <div class="tab">Scorecard</div>
-    <div class="tab">Info</div>
+    <div class="tab active" onclick="showTab('highlights')">Highlights</div>
+    <div class="tab" onclick="showTab('commentary')">Commentary</div>
   </div>
 
-  <div class="content">
+  <div id="content" class="content"></div>
 `;
 
-match.stats.forEach(stat => {
-  html += `<div class="stats">${stat}</div>`;
-});
-
-// LIVE button only if link exists
-if (match.live) {
-  html += `
-    <div style="margin-top:20px;">
-      🔴 LIVE NOW
-      <br>
-      <a href="${match.live}" target="_blank" class="live-btn">
-        Watch Live
-      </a>
-    </div>
-  `;
-}
-
-html += `</div>`;
-
-document.getElementById("app").innerHTML = html;
+showTab("highlights");
 </script>
 
 </body>

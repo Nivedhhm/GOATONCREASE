@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IPL 2026</title>
+
+<style>
+body {
+  margin:0;
+  background:#0b0b0b;
+  font-family:Arial;
+}
+
+/* CARD */
+.container {
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.card {
+  width:90%;
+  max-width:900px;
+  background:#1c1c1c;
+  border-radius:25px;
+  padding:30px;
+  color:white;
+  text-align:center;
+
+  box-shadow: 0 0 0 2px white, 0 0 20px rgba(255,255,255,0.3);
+}
+
+/* TEAMS */
+.teams {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.team img {
+  width:120px;
+  height:120px;
+  object-fit:contain;
+  transition:0.4s;
+}
+
+.team-name {
+  font-size:26px;
+  margin-top:10px;
+}
+
+/* VS */
+.vs {
+  font-size:60px;
+  font-weight:bold;
+  color:gold;
+}
+
+/* TIMER */
+.timer {
+  margin-top:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:#aaff00;
+}
+
+/* TOSS */
+.toss {
+  margin-top:10px;
+  font-size:18px;
+  color:#00e6ff;
+
+  opacity:0;
+  transform:translateY(10px);
+  transition: all 0.6s ease;
+}
+
+.toss.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* WINNER GLOW */
+.team.winner img {
+  box-shadow: 0 0 25px gold;
+  border-radius:50%;
+  transform: scale(1.1);
+}
+
+/* BOTTOM INFO */
+.bottom {
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+  font-size:14px;
+  color:#ccc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="teams">
+
+      <!-- PBKS -->
+      <div class="team" id="team1">
+        <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg">
+        <div class="team-name">PBKS</div>
+      </div>
+
+      <!-- CENTER -->
+      <div>
+        <div class="vs">VS</div>
+        <div id="timer" class="timer"></div>
+        <div id="toss" class="toss"></div>
+      </div>
+
+      <!-- CSK (UPDATED LOGO) -->
+      <div class="team" id="team2">
+        <img src="https://image2url.com/r2/default/images/1775201472323-c03ac658-f4ce-4f08-98bf-b2e6af49a6f1.png">
+        <div class="team-name">CSK</div>
+      </div>
+
+    </div>
+
+    <div class="bottom">
+      <div>
+        Captain: Shreyas Iyer<br>
+        Coach: Ricky Ponting
+      </div>
+
+      <div>
+        Venue: Chennai
+      </div>
+
+      <div>
+        Captain: Ruturaj Gaikwad<br>
+        Coach: Stephen Fleming
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+// 🕒 MATCH TIME
+const matchTime = new Date("2026-04-03T19:30:00+05:30");
+
+// 🪙 TOSS TIME
+const tossTime = new Date("2026-04-03T19:00:00+05:30");
+
+// 🔗 COMMENTARY LINK
+const liveLink = "https://share.google/TEjlxmkmNVWHg956u";
+
+// ✏️ MANUAL CONTROL
+let tossResult = "";
+let tossWinner = "";
+
+// EXAMPLE:
+// tossResult = "CSK won the toss and chose to bat";
+// tossWinner = "CSK";
+
+
+function updateTimer(){
+  const now = new Date().getTime();
+  const diff = matchTime.getTime() - now;
+
+  const timerEl = document.getElementById("timer");
+  const tossEl = document.getElementById("toss");
+
+  const team1 = document.getElementById("team1");
+  const team2 = document.getElementById("team2");
+
+  // 🔴 MATCH START
+  if(diff <= 0){
+    timerEl.innerHTML = `
+      <a href="${liveLink}" target="_blank"
+      style="background:red;padding:10px 15px;border-radius:10px;color:white;text-decoration:none;font-weight:bold;">
+      🔴 LIVE COMMENTARY
+      </a>
+    `;
+    tossEl.innerHTML = "";
+    tossEl.classList.remove("show");
+    return;
+  }
+
+  // ⏱ TIMER
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((diff%(1000*60*60))/(1000*60));
+  const s = Math.floor((diff%(1000*60))/1000);
+
+  timerEl.innerHTML = d+"d "+h+"h "+m+"m "+s+"s";
+
+  // 🪙 TOSS LOGIC
+  if(now >= tossTime.getTime()){
+
+    tossEl.classList.add("show");
+
+    if(tossResult !== ""){
+      tossEl.innerHTML = "🪙 " + tossResult;
+
+      team1.classList.remove("winner");
+      team2.classList.remove("winner");
+
+      if(tossWinner === "PBKS"){
+        team1.classList.add("winner");
+      }
+      if(tossWinner === "CSK"){
+        team2.classList.add("winner");
+      }
+
+    } else {
+      tossEl.innerHTML = "🪙 TOSS TIME";
+    }
+
+  } else {
+    tossEl.innerHTML = "";
+    tossEl.classList.remove("show");
+  }
+}
+
+setInterval(updateTimer,1000);
+updateTimer();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IPL 2026</title>
+
+<style>
+body {
+  margin:0;
+  background:#e6e6e6;
+  font-family:Arial;
+}
+
+.container {
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.card {
+  width:90%;
+  max-width:900px;
+  background:#1c1c1c;
+  border-radius:25px;
+  padding:30px;
+  color:white;
+  text-align:center;
+}
+
+.teams {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.team img {
+  width:120px;
+}
+
+.team-name {
+  font-size:28px;
+  margin-top:10px;
+}
+
+.vs {
+  font-size:60px;
+  font-weight:bold;
+  color:gold;
+}
+
+.timer {
+  margin-top:15px;
+  font-size:22px;
+  font-weight:bold;
+  color:#aaff00;
+}
+
+.toss {
+  margin-top:10px;
+  font-size:18px;
+  color:#00e6ff;
+}
+
+.bottom {
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+  font-size:14px;
+  color:#ccc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="teams">
+
+      <div class="team">
+        <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg">
+        <div class="team-name">PBKS</div>
+      </div>
+
+      <div>
+        <div class="vs">VS</div>
+        <div id="timer" class="timer"></div>
+        <div id="toss" class="toss"></div>
+      </div>
+
+      <div class="team">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/2e/Chennai_Super_Kings_Logo.svg">
+        <div class="team-name">CSK</div>
+      </div>
+
+    </div>
+
+    <div class="bottom">
+      <div>
+        Captain: Shreyas Iyer<br>
+        Coach: Ricky Ponting
+      </div>
+
+      <div>
+        Venue: MA Chidambaram Stadium, Chennai
+      </div>
+
+      <div>
+        Captain: Ruturaj Gaikwad<br>
+        Coach: Stephen Fleming
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+// ✅ MATCH TIME (7:30 PM IST)
+const matchTime = new Date("2026-04-03T19:30:00+05:30");
+
+// ✅ TOSS TIME (7:00 PM IST)
+const tossTime = new Date("2026-04-03T19:00:00+05:30");
+
+// ✅ YOUR COMMENTARY LINK
+const liveLink = "https://share.google/TEjlxmkmNVWHg956u";
+
+// 🔧 MANUAL TOSS RESULT (EDIT THIS WHEN NEEDED)
+let tossResult = ""; 
+// Example:
+// tossResult = "CSK won the toss and chose to bat";
+
+
+function updateTimer(){
+  const now = new Date().getTime();
+  const diff = matchTime.getTime() - now;
+
+  const timerEl = document.getElementById("timer");
+  const tossEl = document.getElementById("toss");
+
+  // 🔴 MATCH START → SHOW LIVE
+  if(diff <= 0){
+    timerEl.innerHTML = `
+      <a href="${liveLink}" target="_blank"
+      style="background:red;padding:10px 15px;border-radius:10px;color:white;text-decoration:none;font-weight:bold;">
+      🔴 LIVE COMMENTARY
+      </a>
+    `;
+    tossEl.innerHTML = "";
+    return;
+  }
+
+  // ⏱ TIMER
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((diff%(1000*60*60))/(1000*60));
+  const s = Math.floor((diff%(1000*60))/1000);
+
+  timerEl.innerHTML = d+"d "+h+"h "+m+"m "+s+"s";
+
+  // 🟡 TOSS TIME LOGIC
+  if(now >= tossTime.getTime()){
+    if(tossResult !== ""){
+      tossEl.innerHTML = "🪙 " + tossResult;
+    } else {
+      tossEl.innerHTML = "🪙 TOSS TIME";
+    }
+  } else {
+    tossEl.innerHTML = "";
+  }
+}
+
+setInterval(updateTimer,1000);
+updateTimer();
+
+</script>
+
+</body>
+</html>

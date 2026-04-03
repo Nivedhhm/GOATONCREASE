@@ -157,8 +157,8 @@ const tossTime = new Date("2026-04-03T19:00:00+05:30");
 const liveLink = "https://share.google/TEjlxmkmNVWHg956u";
 
 // ✏️ MANUAL CONTROL
-let tossResult = "CSK won the toss and chose to bat";
-let tossWinner = "CSK";
+let tossResult = "";
+let tossWinner = "";
 
 // EXAMPLE:
 // tossResult = "CSK won the toss and chose to bat";
@@ -197,7 +197,7 @@ function updateTimer(){
   timerEl.innerHTML = d+"d "+h+"h "+m+"m "+s+"s";
 
   // 🪙 TOSS LOGIC
-  if(true)
+  if(now >= tossTime.getTime())
 
     tossEl.classList.add("show");
 
